@@ -1,0 +1,86 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../core-ajax/core-ajax.html">
+<link rel="import" href="../core-icons/core-icons.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-input/paper-input.html">
+
+<!--
+Element providing entity search in Wikidata.
+
+##### Example
+
+    <wikidata-suggest language="en" limit="3"></wikidata-suggest>
+
+@element wikidata-suggest
+@blurb Element providing entity search in Wikidata.
+@status alpha
+@homepage https://github.com/hubgit/wikidata-suggest
+-->
+<polymer-element name="wikidata-suggest" attributes="limit language">
+  <template>
+    <link rel="stylesheet" href="wikidata-suggest.css">
+
+    <form layout horizontal id="input" on-submit="{{ fetch }}">
+      <paper-input-decorator flex>
+        <input value="{{ search }}">
+      </paper-input-decorator>
+      <template if="{{ search }}">
+        <div>
+          <paper-button raised id="search" on-tap="{{ fetch }}">Search</paper-button>
+        </div>
+      </template>
+    </form>
+
+    <template repeat="{{ items }}">
+      <div class="item" on-tap="{{ selected }}" data-id="{{ id }}" layout horizontal>
+        <div flex>
+          <div class="label">{{ label }}</div>
+          <div>{{ description }}</div>
+        </div>
+        <div>
+          <a href="{{ url }}" target="_blank" class="open">
+            <core-icon icon="open-in-new"></core-icon>
+          </a>
+        </div>
+      </div>
+    </template>
+
+    <core-ajax id="fetch"
+      url="http://www.macropus.org/wikidata/"
+      params="{{ params }}"
+      handleAs="json"
+      on-core-response="{{ handleResponse }}"></core-ajax>
+  </template>
+
+  <script>
+    Polymer({
+      limit: 10,
+      language: 'en',
+      search: '',
+      ready: function() {
+        this.params = {
+          action: 'wbsearchentities',
+          language: this.language,
+          limit: this.limit,
+          search: this.search,
+        }
+      },
+      fetch: function(event) {
+        event && event.preventDefault();
+        this.items = [];
+        this.params.search = this.search;
+        this.$.fetch.go();
+      },
+      handleResponse: function(event, details) {
+        if (details.response.success) {
+          this.items = details.response.search;
+        }
+      },
+      selected: function(event, details, sender) {
+        this.fire('wikidata-selected', {
+          id: sender.getAttribute('data-id')
+        });
+      }
+    });
+  </script>
+</polymer-element>
