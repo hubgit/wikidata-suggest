@@ -1,0 +1,26 @@
+{
+  "name": "wikidata-suggest",
+  "keywords": [
+    "seed",
+    "polymer",
+    "web-components"
+  ],
+  "main": "wikidata-suggest.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5.4",
+    "core-ajax": "Polymer/core-ajax#~0.5.6",
+    "paper-button": "Polymer/paper-button#~0.5.6",
+    "paper-input": "Polymer/paper-input#~0.5.6"
+  },
+  "homepage": "https://github.com/hubgit/wikidata-suggest",
+  "_release": "4c4d486875",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "4c4d4868757953e585cdb9232aaf8fd39f4c78a1"
+  },
+  "_source": "git://github.com/hubgit/wikidata-suggest.git",
+  "_target": "master",
+  "_originalSource": "hubgit/wikidata-suggest",
+  "_direct": true
+}

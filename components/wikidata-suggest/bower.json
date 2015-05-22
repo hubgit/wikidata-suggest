@@ -1,0 +1,16 @@
+{
+  "name": "wikidata-suggest",
+  "version": "0.0.0",
+  "keywords": [
+    "seed",
+    "polymer",
+    "web-components"
+  ],
+  "main": "wikidata-suggest.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5.4",
+    "core-ajax": "Polymer/core-ajax#~0.5.6",
+    "paper-button": "Polymer/paper-button#~0.5.6",
+    "paper-input": "Polymer/paper-input#~0.5.6"
+  }
+}
