@@ -20,9 +20,9 @@ Element providing entity search in Wikidata.
   <template>
     <link rel="stylesheet" href="wikidata-suggest.css">
 
-    <form layout horizontal id="input" on-submit="{{ fetch }}">
-      <paper-input-decorator flex>
-        <input value="{{ search }}">
+    <form layout horizontal on-submit="{{ fetch }}">
+      <paper-input-decorator flex label="Search term">
+        <input value="{{ search }}" id="input">
       </paper-input-decorator>
       <template if="{{ search }}">
         <div>
@@ -64,6 +64,8 @@ Element providing entity search in Wikidata.
           limit: this.limit,
           search: this.search,
         }
+
+        this.$.input.focus();
       },
       fetch: function(event) {
         event && event.preventDefault();
